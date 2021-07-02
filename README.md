@@ -1,19 +1,19 @@
 <p align="center">
     <img src="https://miro.medium.com/max/4000/1*yheNL5Q0ZoZPtnKvLKj4zQ.png" alt="banner"/>
-    <h2 align="center">⚡️ Discord slash command handler written in Python</h2>
+    <h2 align="center">⚡️ Package for using Discord slash commands</h2>
 </p>
 
-## Information
+## 💡 Information
 This handler is just used internally for [AutoMod](https://github.com/TeamAutoMod/AutoMod) 
 and therefore not really meant to be publicly used. It's very far from done or even
 being particularly good, however, it's good for what we need it. I'm still planning on 
 working on this and maybe release a more stable version in the future.
 
-## Usage
-I wouldn't recommend using this, thoogh if you want to to test it, copy the project
+## 📦 Usage
+I wouldn't recommend using this, though if you want to test it, copy the project
 into your working directory and import the modules respectively. You can check out the example below.
 
-## Examples
+## 📌 Examples
 ### Ping command
 The classic ping command, that every bot has.
 ```py
