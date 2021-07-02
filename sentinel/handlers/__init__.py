@@ -1,0 +1,1 @@
+from .slash import slash_handler
