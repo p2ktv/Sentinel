@@ -2,7 +2,7 @@
 Sentinel
 ~~~~~~~
 
-⚡️ Discord slash command handler written in Python
+⚡️ Package for using Discord slash commands
 
 :copyright: (c) 2021 xezzz
 :license: MIT, see LICENSE for more details.
