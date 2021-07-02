@@ -1,7 +1,8 @@
+# import the client and embed class ⬆️
 from sentinel import SentinelClient
 
 
-
+# define the classic client ⚙️
 client = SentinelClient(token="YOUR_BOTS_TOKEN", app_id=123456789).build()
 
 
