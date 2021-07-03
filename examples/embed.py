@@ -7,7 +7,7 @@ client = SentinelClient(token="YOUR_BOTS_TOKEN", app_id=123456789).build()
 
 
 # create a new slash command ✏️
-@client.slash_command(name="embed", guild=123456789, description="📦 Sends an embed")
+@client.slash_command(name="embed", guild_id=123456789, description="📦 Sends an embed")
 def ping(ctx):
 
     # define the embed with 

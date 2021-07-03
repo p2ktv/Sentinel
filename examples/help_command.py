@@ -6,7 +6,7 @@ from sentinel import SentinelClient
 client = SentinelClient(token="YOUR_BOT_TOKEN", app_id=123456789).build()
 
 
-@client.slash_command(name="help", guild=123456789, description="📌 Shows a list of all commands")
+@client.slash_command(name="help", guild_id=123456789, description="📌 Shows a list of all commands")
 def help(ctx):
     # define a list for all the help strings
     output = []

@@ -6,6 +6,6 @@ from sentinel import SentinelClient
 client = SentinelClient(token="YOUR_BOT_TOKEN", app_id=123456789).build()
 
 
-@client.slash_command(name="dm", guild=123456789, description="🎉 Sends a simple DM to the author")
+@client.slash_command(name="dm", guild_id=123456789, description="🎉 Sends a simple DM to the author")
 def dm(ctx):
     ctx.dm("Only you can see this message!")
