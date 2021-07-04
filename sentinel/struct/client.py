@@ -2,6 +2,7 @@ import asyncio
 import concurrent
 import logging
 import time
+import inspect
 from functools import wraps
 
 from ..rest.ws import WebSocket
@@ -9,6 +10,7 @@ from ..rest.http import HTTPClient
 from ..errors import SentinelError
 from .types import Activity, Status
 from ..utils.payloads import Presence
+from ..utils.utils import get_command_params
 
 
 
@@ -69,7 +71,7 @@ class SentinelClient:
     def latency(self):
         return round(self._ws.latency * 1000)
 
-    
+
 
     def slash_command(self, name: str, guild_id: int, description: str = "A cool command!", category: str = "default"):
         def dec(func, name=name, category=category, description=description):
@@ -82,11 +84,13 @@ class SentinelClient:
             def wrapper(*args, **kwargs):
                 return func(*args, **kwargs)
 
+            params = get_command_params(wrapper)
             self.commands.update({
                 name: {
                     "category": category,
                     "description": description,
                     "func": wrapper,
+                    "params": params,
                     "kwargs": {"bot": self}
                 }
             })
@@ -100,13 +104,13 @@ class SentinelClient:
 
             setattr(self, name, wrapper)
 
-            self._register_command(guild_id, name, description)
+            self._register_command(guild_id, name, description, params)
 
             return func
         return dec
 
 
-    def _register_command(self, guild_id: int, name: str, description: str = "A cool command!"):
+    def _register_command(self, guild_id: int, name: str, description: str, params: list):
         try:
             commands = self._http.get_guild_commands(guild_id, self.app_id)
         except SentinelError:
@@ -117,7 +121,7 @@ class SentinelClient:
                     self._http.delete_guild_command(guild_id, self.app_id, cmd["id"])
 
             if name not in [i["name"].lower() for i in commands]:
-                self._http.register_guild_command(guild_id, self.app_id, name, description)
+                self._http.register_guild_command(guild_id, self.app_id, name, description, params)
             else:
                 pass
 

@@ -237,7 +237,7 @@ class HTTPClient:
             log.error(ex)
 
 
-    def register_guild_command(self, guild_id: int, app_id: int, name: str, description: str):
+    def register_guild_command(self, guild_id: int, app_id: int, name: str, description: str, params: list):
         description = description if description != None else "A cool command!"
         try:
             payload = {
@@ -245,6 +245,22 @@ class HTTPClient:
                 "description": description,
                 "options": []
             }
+
+            options = []
+            if len(params) > 0:
+                for i, p in enumerate(params):
+                    options.append(
+                        {
+                            "name": p,
+                            "description": f"Parameter number {i+1}",
+                            "type": 3,
+                            "required": True
+                        }
+                    )
+                payload.update({
+                    "options": options
+                })
+            
             r = Route("POST", f"/applications/{app_id}/guilds/{guild_id}/commands")
 
             res = self.loop.run_until_complete(self.request(r, json=payload))

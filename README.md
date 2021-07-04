@@ -17,7 +17,7 @@ into your working directory and import the modules respectively. You can check o
 ### Ping command
 The classic ping command, that every bot has.
 ```py
-# import the client and embed class ⬆️
+# import the client class ⬆️
 from sentinel import SentinelClient
 
 
@@ -36,7 +36,7 @@ def ping(ctx):
 A simple help command providing a user with the command and
 its respective description.
 ```py
-# import the client and embed class ⬆️
+# import the client class ⬆️
 from sentinel import SentinelClient
 
 

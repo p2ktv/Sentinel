@@ -1,4 +1,4 @@
-# import the client and embed class ⬆️
+# import the client class ⬆️
 from sentinel import SentinelClient
 
 
