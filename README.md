@@ -10,8 +10,10 @@ being particularly good, however, it's good for what we need it. I'm still plann
 working on this and maybe release a more stable version in the future.
 
 ## 📦 Usage
-I wouldn't recommend using this, though if you want to test it, copy the project
-into your working directory and import the modules respectively. You can check out the example below.
+If you want to test this out, write the following in your terminal:
+```sh
+py -3 -m pip install sentinel-python
+```
 
 ## 📌 Examples
 ### Ping command
