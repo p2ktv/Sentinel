@@ -15,3 +15,13 @@ Identify = {
         },
     }
 }
+
+Presence = {
+    "op": 3,
+    "d": {
+        "activities": [],
+        "afk": False,
+        "since": 0.0,
+        "status": ""
+    }
+}

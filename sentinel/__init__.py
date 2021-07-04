@@ -10,4 +10,4 @@ Sentinel
 
 from .rest import *
 from .struct.client import SentinelClient
-from .struct.types import Embed, User, Context
+from .struct.types import Embed, User, Context, Activity, Status

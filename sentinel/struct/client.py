@@ -1,11 +1,14 @@
 import asyncio
 import concurrent
 import logging
+import time
 from functools import wraps
 
 from ..rest.ws import WebSocket
 from ..rest.http import HTTPClient
 from ..errors import SentinelError
+from .types import Activity, Status
+from ..utils.payloads import Presence
 
 
 
@@ -49,6 +52,7 @@ class SentinelClient:
         self.id = self._ws.id
         self.name = self._ws.username
         self.discriminator = self._ws.discriminator
+        self._http._delete_old_commands(self.commands, self.app_id)
 
 
 
@@ -116,3 +120,25 @@ class SentinelClient:
                 self._http.register_guild_command(guild_id, self.app_id, name, description)
             else:
                 pass
+
+
+    def new_presence(self, activity: Activity = None, status: Status = None):
+        if activity is not None:
+            activity = [activity._to_json()]
+        else:
+            activity = []
+
+        if status == "idle":
+            since = int(time.time() * 1000)
+        else:
+            since = 0.0
+
+        Presence["d"].update({
+            "since": since,
+            "status": status,
+            "activities": activity
+        })
+
+        self._ws.send_payload(Presence)
+
+    

@@ -145,7 +145,7 @@ class HTTPClient:
                             return data
 
                         if res.status == 429:
-                            if not r.headers.get("Via"):
+                            if not res.headers.get("Via"):
                                 raise HTTPException(res, data)
                             
                             txt = "Ratelimited! Retrying in {0} seconds (Bucket {1})"
@@ -296,5 +296,19 @@ class HTTPClient:
             dm_channel = self.loop.run_until_complete(self.request(dm_req, json=dm_channel_payload))
             
             return self.send_message(dm_channel["id"], content, embeds)
+        except SentinelError as ex:
+            log.error(ex)
+
+
+    def _delete_old_commands(self, commands: list, app_id: int):
+        try:
+            r = Route("GET", "/users/@me/guilds")
+
+            guilds = self.loop.run_until_complete(self.request(r))
+            for g in guilds:
+                all_commands = self.get_guild_commands(g["id"], app_id)
+                for cmd in all_commands:
+                    if not cmd["name"].lower() in commands:
+                        self.delete_guild_command(g["id"], app_id, cmd["id"])
         except SentinelError as ex:
             log.error(ex)
