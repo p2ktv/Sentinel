@@ -4,8 +4,9 @@ from setuptools import setup, find_packages
 
 setup(
     name="sentinel-python",
-    version="0.0.1",
+    version="0.0.2",
     author="xezzz",
+    author_email="ezzz.btw@gmail.com",
     description="Package for using Discord slash commands",
     packages=find_packages(),
     install_requires=["websocket-client", "aiohttp"],

@@ -279,12 +279,13 @@ class HTTPClient:
             log.error(ex)
 
 
-    def respond_to_command(self, interaction_id: int, interaction_token: str, _type: int, content: str, embeds: list = None):
+    def respond_to_command(self, interaction_id: int, interaction_token: str, _type: int, content: str, embeds: list = None, flags = None):
         try:
             payload = {
                 "type": _type,
                 "data": {
-                    "content": content
+                    "content": content,
+                    "flags": flags
                 }
             }
             final_embeds = []

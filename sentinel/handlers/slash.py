@@ -21,6 +21,6 @@ def slash_handler(ws, payload):
                     args.append(e["value"])
         
         try:
-            func(Context(payload, bot.get("bot")), *args)
+            func(Context(payload, bot.get("bot"), ws.commands[name]["flags"]), *args)
         except SentinelError as ex:
             log.error(ex)

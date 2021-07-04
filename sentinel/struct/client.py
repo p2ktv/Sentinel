@@ -73,7 +73,7 @@ class SentinelClient:
 
 
 
-    def slash_command(self, name: str, guild_id: int, description: str = "A cool command!", category: str = "default"):
+    def slash_command(self, name: str, guild_id: int, description: str = "A cool command!", category: str = "default", ephemeral: bool = False):
         def dec(func, name=name, category=category, description=description):
             name = name.lower()
             category = category.lower()
@@ -85,12 +85,19 @@ class SentinelClient:
                 return func(*args, **kwargs)
 
             params = get_command_params(wrapper)
+
+            if ephemeral:
+                flags = 64
+            else:
+                flags = None
+
             self.commands.update({
                 name: {
                     "category": category,
                     "description": description,
                     "func": wrapper,
                     "params": params,
+                    "flags": flags,
                     "kwargs": {"bot": self}
                 }
             })

@@ -3,11 +3,12 @@ from .user import User
 
 
 class Context:
-    def __init__(self, payload, bot, _type=4):
+    def __init__(self, payload, bot, flags, _type=4):
         self.bot = bot
         self._token = payload["token"]
         self._id = payload["id"]
         self._type = _type
+        self.flags = flags
         self.channel_id = payload["channel_id"]
         self.message_id = payload["data"]["id"]
         self.author = User(payload)
@@ -19,7 +20,8 @@ class Context:
             self._token, 
             self._type, 
             content,
-            embeds
+            embeds,
+            flags=self.flags
         )
         return message
 
